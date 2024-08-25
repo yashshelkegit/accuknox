@@ -5,7 +5,7 @@ import {
 	toggleWidget,
 	setSelectedCategory,
 } from "../features/WidgetSlice";
-import { AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
+import { AiOutlineClose } from "react-icons/ai";
 
 const Sidebar = ({ onClose }) => {
 	const dispatch = useDispatch();
