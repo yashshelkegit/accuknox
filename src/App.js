@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Provider } from "react-redux";
 import store from "./store";
-import Header from "./components/Header";
 import Toolbar from "./components/Toolbar";
 import Dashboard from "./components/Dashboard";
 import Sidebar from "./components/Sidebar";
 
 function App() {
 	const [sidebarOpen, setSidebarOpen] = useState(false);
+	const [searchQuery, setSearchQuery] = useState(""); 
 
 	const handleOpenSidebar = () => {
 		setSidebarOpen(true);
@@ -17,13 +17,19 @@ function App() {
 		setSidebarOpen(false);
 	};
 
+	const handleSearch = (query) => {
+		setSearchQuery(query);
+	};
+
 	return (
 		<Provider store={store}>
-			<div className="flex flex-col h-screen">
-				<Header />
-				<Toolbar onAddWidgetClick={handleOpenSidebar} />
-				<div className="flex flex-1 overflow-hidden">
-					<Dashboard onOpenSidebar={handleOpenSidebar} />
+			<div className="flex flex-col ">
+				<Toolbar onAddWidgetClick={handleOpenSidebar} onSearch={handleSearch} />
+				<div className="flex bg-blue-100 flex-1 overflow-hidden">
+					<Dashboard
+						onOpenSidebar={handleOpenSidebar}
+						searchQuery={searchQuery}
+					/>
 					{sidebarOpen && <Sidebar onClose={handleCloseSidebar} />}
 				</div>
 			</div>
